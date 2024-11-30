@@ -1,8 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { Image, View, Text, StyleSheet } from 'react-native';
 import { useFontContext } from '@/context/FontContext';  // Adjust the import path accordingly
+import { HelloWave } from "@/components/common/HelloWave";
 import CardScreen from '@/components/common/CardScreen';
+import CardOutline from '@/components/common/Card.Outline';
 import TopBanner from '@/components/layout/TopBanner';
+import SearchBar from '@/components/common/Searchbar';
+import ParallaxScrollView from "@/components/common/ParallaxScrollView";
 
 export default function ExploreScreen() {
   const { fontsLoaded, error } = useFontContext();
@@ -26,17 +30,35 @@ export default function ExploreScreen() {
   return (
     <>
       <TopBanner>
-        <Text style={{...styles.customFontText, color:"black", fontSize:30}}>Open Sauce Font</Text>
+        <SearchBar />
       </TopBanner>
-      <View style={styles.container}>
-        <Text style={styles.customFontText}>Explore</Text>
-        <CardScreen />
-      </View>
+
+      <ParallaxScrollView
+        headerBackgroundColor={{ light: "#A1CEDC", dark: "#1D3D47" }}
+        headerImage={
+          <Image
+            source={require("@/assets/images/partial-react-logo.png")}
+            style={styles.reactLogo}
+          />
+        }
+      >
+        <View style={styles.content}>
+          <CardOutline />
+          <CardOutline />
+        </View>
+      </ParallaxScrollView>
     </>
   );
 }
 
 const styles = StyleSheet.create({
+  main: {
+    height: "auto",
+    overflowY: "scroll",  
+  },  
+  content: {
+    // padding: 20,
+  },
   container: {
     flex: 1,
     justifyContent: 'center',
