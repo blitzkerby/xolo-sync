@@ -13,9 +13,6 @@ import * as SplashScreen from 'expo-splash-screen';
 // hooks
 import { useColorScheme } from '@/hooks/useColorScheme';
 
-// context
-import FontProvider from '@/context/FontContext';
-
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -38,14 +35,12 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-        <FontProvider>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="auto" />
-        </FontProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack>
+          <Stack.Screen name="(tabs)" options={{ headerShown: true }} />
+          <Stack.Screen name="+not-found" />
+        </Stack>
+        <StatusBar style="auto" />
       </ThemeProvider>
     </SafeAreaProvider>
   );

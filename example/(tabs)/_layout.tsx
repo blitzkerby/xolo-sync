@@ -1,10 +1,16 @@
 import React from 'react';
 import { Tabs } from 'expo-router';
 import { Platform } from 'react-native';
-import Icon from 'react-native-vector-icons/Ionicons';
+import Icon from 'react-native-vector-icons/Ionicons'; // Make sure you import the correct icon set
+
+// components
 import { HapticTab } from '@/components/common/HapticTab';
 import TabBarBackground from '@/components/common/TabBarBackground';
+
+// constants
 import { Colors } from '@/constants/Colors';
+
+// hooks
 import { useColorScheme } from '@/hooks/useColorScheme';
 
 export default function TabLayout() {
@@ -14,12 +20,13 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: true,
+        headerShown: false,
         tabBarShowLabel: false,
         tabBarButton: HapticTab,
         tabBarBackground: TabBarBackground,
         tabBarStyle: Platform.select({
           ios: {
+            // Use a transparent background on iOS to show the blur effect
             position: 'absolute',
           },
           default: {},
@@ -30,28 +37,28 @@ export default function TabLayout() {
         name="index"
         options={{
           title: 'Home',
-          tabBarIcon: () => <Icon size={28} name="home" />,
+          tabBarIcon: ({ color }) => <Icon size={28} name="home" color={color} />,
         }}
       />
       <Tabs.Screen
         name="explore"
         options={{
           title: 'Explore',
-          tabBarIcon: () => <Icon size={28} name="search" />,
+          tabBarIcon: ({ color }) => <Icon size={28} name="search" color={color} />,
         }}
       />
       <Tabs.Screen
         name="about"
         options={{
           title: 'About',
-          tabBarIcon: () => <Icon size={28} name="paper-plane" />,
+          tabBarIcon: ({ color }) => <Icon size={28} name="paper-plane" color={color} />,
         }}
       />
       <Tabs.Screen 
         name="account"
         options={{
           title: 'Account',
-          tabBarIcon: () => <Icon size={28} name="person" />,
+          tabBarIcon: ({ color }) => <Icon size={28} name="person" color={color} />,
         }}
       />
     </Tabs>
