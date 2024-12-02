@@ -2,11 +2,11 @@ import React from 'react';
 import { Image, View, Text, StyleSheet } from 'react-native';
 import { useFontContext } from '@/context/FontContext';  // Adjust the import path accordingly
 import { HelloWave } from "@/components/common/HelloWave";
-import CardScreen from '@/components/common/CardScreen';
-import CardOutline from '@/components/common/Card.Outline';
+import CardScreen from '@/components/ui/CardScreen';
+import CardOutline from '@/components/ui/Card.Outline';
 import TopBanner from '@/components/layout/TopBanner';
 import SearchBar from '@/components/common/Searchbar';
-import ParallaxScrollView from "@/components/common/ParallaxScrollView";
+import ParallaxScrollView from "@/components/ui/ParallaxScrollView";
 
 export default function ExploreScreen() {
   const { fontsLoaded, error } = useFontContext();
