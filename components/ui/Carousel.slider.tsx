@@ -7,20 +7,13 @@ import {
   StyleSheet,
   Text,
 } from "react-native";
+import CarouselIndicator from "./Carousel.indicator";
 
 const { width: screenWidth } = Dimensions.get("window");
 
 const CarouselSlider = ({ children, amount }) => {
   const [currentItem, setCurrentItem] = useState(0);
   const scrollViewRef = useRef(null);
-
-  // const handleScroll = (event) => {
-  //   const slideWidth = screenWidth;
-  //   const currentOffset = event.nativeEvent.contentOffset.x;
-  //   const currentIndex = Math.round(currentOffset / slideWidth);
-
-  //   setCurrentItem(currentIndex);
-  // };
 
   const scrollToIndex = (index) => {
     scrollViewRef.current.scrollTo({
@@ -30,28 +23,41 @@ const CarouselSlider = ({ children, amount }) => {
     setCurrentItem(index);
   };
 
+  useEffect(() => {
+    console.log(`need to scroll to ${scrollToIndex}`)
+    scrollToIndex(currentItem)
+  }, [currentItem])
+
   return (
     <View style={styles.container}>
       <ScrollView
         horizontal={true}
         showsHorizontalScrollIndicator={false}
         pagingEnabled={false}
-        
         ref={scrollViewRef}
         scrollEventThrottle={16}
         style={styles.carouselSlider}
       >
         {children}
       </ScrollView>
+
+      <CarouselIndicator
+        amount={amount}
+        activeIndex={currentItem}
+        setActiveIndex={setCurrentItem}
+      />
+
       <View style={styles.controller}>
         <Button
           title="Previous"
-          onPress={() => scrollToIndex(currentItem > 0 ? currentItem - 1 : 0)}
+          onPress={() => scrollToIndex(currentItem > 1 ? currentItem - 1 : 0)}
         />
         <Button
           title="Next"
           onPress={() =>
-            scrollToIndex(currentItem < amount - 1 ? currentItem + 1 : amount - 1)
+            scrollToIndex(
+              currentItem < amount - 1 ? currentItem + 1 : amount - 1
+            )
           }
         />
       </View>
