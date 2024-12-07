@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 
-import CardOutline from "@/components/ui/Card.Outline";
+import CardOutline from "@/components/ui/Outline.Card";
 import Carousel from "@/components/ui/Carousel"
 
 const HomePage = () => {

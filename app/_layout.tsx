@@ -1,7 +1,9 @@
 // dependencies
 import { Stack } from 'expo-router';
 import { useEffect } from 'react';
+import { AppRegistry } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 // assets
 import { useFonts } from 'expo-font';
@@ -38,15 +40,21 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
-      <ThemeProvider value={colorScheme === 'light' ? DarkTheme : DefaultTheme}>
-        <FontProvider>
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="+not-found" />
-          </Stack>
-          <StatusBar style="auto" />
-        </FontProvider>
-      </ThemeProvider>
+      <GestureHandlerRootView>
+        <ThemeProvider
+          value={colorScheme === "light" ? DarkTheme : DefaultTheme}
+        >
+          <FontProvider>
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="+not-found" />
+            </Stack>
+            <StatusBar style="auto" />
+          </FontProvider>
+        </ThemeProvider>
+      </GestureHandlerRootView>
     </SafeAreaProvider>
   );
 }
+
+AppRegistry.registerComponent('App', () => RootLayout);
